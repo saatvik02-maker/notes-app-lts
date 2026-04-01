@@ -4,20 +4,24 @@ services:
     ports:
       - "3000:80"
     volumes:
-    - ./frontend:/usr/share/nginx/html
+      - ./frontend:/usr/share/nginx/html
+    restart: always
 
   backend:
     build: ./backend
-    container_name: backend
+    container_name: notes-backend
     ports:
       - "5000:5000"
     depends_on:
       - mongo
+    restart: always
 
   mongo:
     image: mongo
+    container_name: notes-mongo
     volumes:
       - mongo-data:/data/db
+    restart: always
 
 volumes:
   mongo-data:
